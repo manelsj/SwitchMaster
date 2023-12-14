@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,11 +12,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject mainMenu;
     public GameObject switchCounter;
+    public Button quitButton;
 
     public void OpenLevel(int level)
     {
         Levels[level].SetActive(true);
-        switchCounter.SetActive(true);
+        Levels[currentLevel].GetComponentInChildren<LevelManager>().ResetLevel();
+        quitButton.gameObject.SetActive(true);
     }
 
     public void NextLevel()
@@ -28,16 +31,32 @@ public class GameManager : MonoBehaviour
         {
             OpenLevel(currentLevel);
         }
+        else
+        {
+            ActivateMainMenu();
+        }
         
     }
 
     public void ActivateMainMenu()
     {
         mainMenu.SetActive(true);
+        switchCounter.GetComponent<SwitchCounter>().Deactivate();
+        quitButton.gameObject.SetActive(false);
     }
 
     public void DeactivateMainMenu()
     {
         mainMenu.SetActive(false);
+    }
+
+    public void QuitToMainMenu()
+    {
+        Levels[currentLevel].GetComponentInChildren<LevelManager>().ResetLevel();
+        Levels[currentLevel].SetActive(false);
+        currentLevel = 0;
+        
+
+        ActivateMainMenu();
     }
 }

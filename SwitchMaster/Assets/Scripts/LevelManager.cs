@@ -7,12 +7,11 @@ public class LevelManager : MonoBehaviour
 {
     public List<GameObject> LightList;
     private GameObject gameManager;
-    private GameObject switchCounter;
+    public GameObject switchCounter;
 
     void Start()
     {
         gameManager = GameObject.FindWithTag("GameManager");
-        switchCounter = GameObject.FindWithTag("Counter");
     }
 
     void Update()

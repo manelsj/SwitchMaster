@@ -9,7 +9,7 @@ public class SwitchCounter : MonoBehaviour
     private int count = 0;
     public TMP_Text counterText;
 
-    void Start()
+    void StartCount()
     {
         counterText.text = ("Switch Count: " + count.ToString());
     }
@@ -24,5 +24,11 @@ public class SwitchCounter : MonoBehaviour
     {
         count = 0;
         counterText.text = ("Switch Count: " + count.ToString());
+    }
+
+    public void Deactivate()
+    {
+        count = 0;
+        counterText.text = ("");
     }
 }

@@ -15,4 +15,9 @@ public class MainMenuController : MonoBehaviour
         gameManager.GetComponent<GameManager>().DeactivateMainMenu();
         gameManager.GetComponent<GameManager>().OpenLevel(0);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
