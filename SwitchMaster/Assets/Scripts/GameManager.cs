@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private int currentLevel = 0;
 
     public GameObject mainMenu;
+    public GameObject victoryMenu;
     public GameObject switchCounter;
     public Button quitButton;
 
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            ActivateMainMenu();
+            ActivateVictoryMenu();
         }
         
     }
@@ -52,11 +53,27 @@ public class GameManager : MonoBehaviour
 
     public void QuitToMainMenu()
     {
-        Levels[currentLevel].GetComponentInChildren<LevelManager>().ResetLevel();
-        Levels[currentLevel].SetActive(false);
+        if (currentLevel < Levels.Count)
+        {
+            Levels[currentLevel].GetComponentInChildren<LevelManager>().ResetLevel();
+            Levels[currentLevel].SetActive(false);
+        }
+        
         currentLevel = 0;
         
 
         ActivateMainMenu();
+    }
+
+    public void ActivateVictoryMenu()
+    {
+        victoryMenu.SetActive(true);
+        switchCounter.GetComponent<SwitchCounter>().Deactivate();
+        quitButton.gameObject.SetActive(false);
+
+    }
+    public void DeactivateVictoryMenu()
+    {
+        victoryMenu.SetActive(false);
     }
 }
